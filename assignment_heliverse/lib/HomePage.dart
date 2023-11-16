@@ -15,6 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<String> categories = ['Domain', 'Gender', 'Availability'];
   List<String> selectedCategories = [];
+  List<String> tempArray = [];
   @override
   Widget build(BuildContext context) {
     final filterProducts = _userList.data.where((product) {
@@ -161,6 +162,39 @@ class _MyHomePageState extends State<MyHomePage> {
                                           // Text("${data?[index].domain}"),
                                           Text("${data?[index].domain}"),
                                         ],
+                                      ),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: tempArray.contains(
+                                                  _userList.data[index]
+                                                      .toString())
+                                              ? Colors.red
+                                              : Colors.green,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            if (tempArray.contains(_userList
+                                                .data[index]
+                                                .toString())) {
+                                              tempArray.remove(_userList
+                                                  .data[index]
+                                                  .toString());
+                                              print("removed");
+                                            } else {
+                                              tempArray.add(_userList
+                                                  .data[index]
+                                                  .toString());
+                                            }
+                                          });
+                                          print("added value");
+                                          print(
+                                              _userList.data[index].toString());
+                                        },
+                                        child: Text(tempArray.contains(_userList
+                                                .data[index]
+                                                .toString())
+                                            ? "Remove"
+                                            : "Add"),
                                       )
                                     ],
                                   )
